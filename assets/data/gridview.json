@@ -1,0 +1,216 @@
+{
+    "type": "scaffold",
+    "args": {
+        "appBar": {
+            "type": "app_bar",
+            "args": {
+                "title": {
+                    "type": "text",
+                    "args": {
+                        "text": "AppBar"
+                    }
+                }
+            }
+        },
+        "body": {
+            "type": "padding",
+            "args": {
+                "padding": {
+                    "bottom": 20.0,
+                    "left": 16.0,
+                    "right": 16.0,
+                    "top": 20.0
+                },
+                "child": {
+                    "type": "list_view",
+                    "args": {
+                        "children": [
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg1"
+                                ],
+                                "args": {
+                                    "onPressed": "${updateCustomBg()}",
+                                    "style": {
+                                        "backgroundColor": "${customBg1}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#1"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg2"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg2}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#2"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg3"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg3}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#3"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg4"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg4}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#4"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg5"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg5}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#5"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg6"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg6}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#6"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg7"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg7}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#7"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg8"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg8}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#8"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "listen": [
+                                    "customBg9"
+                                ],
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg9}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#9"
+                                            
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": "elevated_button",
+                                "args": {
+                                    "style": {
+                                        "backgroundColor": "${customBg10}"
+                                    },
+                                    "child": {
+                                        "type": "text",
+                                        "args": {
+                                            "text": "#10"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "floatingActionButton": {
+            "type": "floating_action_button",
+            "args": {
+                "onPressed": "${updateCustomBg()}"
+            }
+        }
+    }
+}

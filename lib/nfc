@@ -1,0 +1,76 @@
+/*
+Near field communication (NFC)
+ là một tập hợp các công nghệ không dây tầm ngắn
+
+ NFC cho phép bạn chia sẻ tải trọng dữ liệu nhỏ giữa thẻ NFC và Thiết bị hỗ trợ  
+ hoặc giữa hai thiết bị hỗ trợ.
+
+Thẻ NFC gửi sóng vô tuyến để kích hoạt ăng-ten trong thiết bị nhận.
+
+Công nghệ này hoạt động trong khoảng cách rất ngắn - khoảng 4 inch. Thẻ NFC hoạt động mà không cần pin 
+và lấy năng lượng từ một thiết bị khác, ví dụ: điện thoại thông minh.
+
+NFC được sử dụng trong các ứng dụng như thanh toán di động, chia sẻ tệp, và các ứng dụng khác.
+
+Required >Iphone 7 or later
+ios 13 or later 
+
+requires Android API level 19 or later
+*/
+
+// {
+//     isodep:{
+//     identifier: [8, 117, 87, 176],
+//     hiLayerResponse: null,
+//     historicalBytes: [77, 75, 106, 67, 79, 83, 45, 51, 55],
+//     isExtendedLengthApduSupported: true,
+//     maxTransceiveLength: 1024,
+//     timeout: 618
+//     },
+//     nfca: {
+//         identifier: [8, 117, 87, 176],
+//         atqa: [4, 0],
+//         maxTransceiveLength: 253,
+//         sak: 32,
+//         timeout: 618
+//     }
+// }
+
+// {
+//     isodep: {
+//     identifier: [8, 85, 51, 119],
+//      hiLayerResponse: null,
+//      historicalBytes: [77, 75, 106, 67, 79, 83, 45, 51, 55],
+//      isExtendedLengthApduSupported: true,
+//      maxTransceiveLength: 1024,
+//      timeout: 618}
+//      ,
+//      nfca: {
+//         identifier: [8, 85, 51, 119],
+//         atqa: [4, 0],
+//         maxTransceiveLength: 253,
+//         sak: 32,
+//         timeout: 618}
+//     }
+
+// {
+//     "type":"iso7816",
+//     "standard":"ISO 14443-4 (Type A)",
+//     "id":"082109C4",
+//     "atqa":"0400",
+//     "sak":"20",
+//     "historicalBytes":"4D4B6A434F532D3337",
+//     "hiLayerResponse":"",
+//     "protocolInfo":"",
+//     "applicationData":"",
+//     "manufacturer":"",
+//     "systemCode":"",
+//     "dsfId":"",
+//     "ndefAvailable":false,
+//     "ndefType":"",
+//     "ndefCapacity":0,
+//     "ndefWritable":false,
+//     "ndefCanMakeReadOnly":false,
+//     "webUSBCustomProbeData":null,
+//     "mifareInfo":null
+// }

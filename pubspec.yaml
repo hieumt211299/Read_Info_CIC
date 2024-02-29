@@ -1,30 +1,46 @@
-name: dmrtd
-description: Dart implementation of ICAO Doc 9303 MRTD
-
-version: 1.4.3
+name: flutter_server_driven_ui
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
 
 environment:
-  sdk: ">=2.17.1 <3.0.0"
+  sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
-  archive: ^3.1.2
-  collection: ^1.16.0
-  convert: ^3.0.0
-  crypto: ^3.0.1
-  expandable: ^5.0.1
-  fixnum: ^1.0.0
-  flutter_nfc_kit: "^3.1.0"
+  dmrtd:
+    path: /Users/maitrunghieu/workspace/work/flutter/dmrtdIDNFC
+    # git:
+    #   url: https://github.com/hieumt211299/NFC-scan-Passport-IDcard.git
+    #   ref: main
+    #   auth:
+    #     username: hieumt211299
+    #     password: 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
+
+  flutter:
+    sdk: flutter
+  flutter_nfc_kit: ^3.4.2
+  flutter_image_compress: ^2.1.0
+  google_mlkit_text_recognition: ^0.4.0
+  json_dynamic_widget: ^7.0.6+2
+  nfc_manager: ^3.3.0
+  camera: ^0.10.5+8
+  permission_handler: ^11.1.0
   flutter_platform_widgets: ^6.1.0
+  expandable: ^5.0.1
   intl: ^0.19.0
   logging: ^1.2.0
-  meta: ^1.3.0
-  tripledes_nullsafety: ^1.0.3
+  image: ^4.1.7
+  mrzscanner_flutter: ^1.0.14
+  mrz_parser: ^2.0.0
+  path_provider: ^2.1.2
 
 dev_dependencies:
-  flutter: # needed for flutter_nfc_kit
+  flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
-  flutter_test: # needed for flutter_nfc_kit
-    sdk: flutter
-  lints: ^2.0.0
-  test: ^1.16.5
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/data/

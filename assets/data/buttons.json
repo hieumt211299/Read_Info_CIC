@@ -1,0 +1,76 @@
+{
+    "type": "scaffold",
+    "args": {
+        "appBar": {
+            "type": "app_bar",
+            "args": {
+                "title": {
+                    "type": "text",
+                    "args": {
+                        "text": "Buttons"
+                    }
+                }
+            }
+        },
+        "body": {
+            "type": "column",
+            "args": {
+                "children": [
+                    {
+                        "type": "expanded",
+                        "args": {
+                            "child": {
+                                "type": "center",
+                                "args": {
+                                    "child": {
+                                        "type": "elevated_button",
+                                        "listen": [
+                                            "customBg"
+                                        ],
+                                        "args": {
+                                            "onPressed": "${updateCustomBg()}",
+                                            "style": {
+                                                "foregroundColor": {
+                                                    "pressed": "FF2196F3",
+                                                    "focused": "FF2196F3",
+                                                    "empty": "FFF44336"
+                                                },
+                                                "backgroundColor": "${customBg}"
+                                            },
+                                            "child": {
+                                                "type": "text",
+                                                "id": "text_1",
+                                                "listen": [
+                                                    "customText"
+                                                ],
+                                                "args": {
+                                                    "text": "${customText}"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "floatingActionButton": {
+            "type": "floating_action_button",
+            "args": {
+                "onPressed": "${set_value('customText', 'This is not a short text. This is a very very long text.')}",
+                "child": {
+                    "type": "icon",
+                    "args": {
+                        "icon": {
+                            "codePoint": 57369,
+                            "fontFamily": "MaterialIcons"
+                        },
+                        "size": 50
+                    }
+                }
+            }
+        }
+    }
+}
