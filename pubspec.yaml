@@ -8,13 +8,13 @@ environment:
 
 dependencies:
   dmrtd:
-    path: /Users/maitrunghieu/workspace/work/flutter/dmrtdIDNFC
-    # git:
-    #   url: https://github.com/hieumt211299/NFC-scan-Passport-IDcard.git
-    #   ref: main
-    #   auth:
-    #     username: hieumt211299
-    #     password: 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
+    # path: /Users/maitrunghieu/workspace/work/flutter/dmrtdIDNFC
+    git:
+      url: https://github.com/hieumt211299/NFC-scan-Passport-IDcard.git
+      ref: main
+      auth:
+        username: hieumt211299
+        password: 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
 
   flutter:
     sdk: flutter
