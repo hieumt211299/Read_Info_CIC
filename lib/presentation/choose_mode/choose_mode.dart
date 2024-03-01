@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
-class ChooseModeScreen extends StatelessWidget {
+class ChooseModeScreen extends StatefulWidget {
   const ChooseModeScreen({super.key});
-  Future<String> checkNfcAvailability() async {
-    bool isAvailable = await NfcManager.instance.isAvailable();
 
-    if (!isAvailable) {
-      // NFC is not available on the device.
-      return 'NFC is not available on this device.';
-    } else {
-      // NFC is available on the device.
-      return 'NFC is available on this device.';
-    }
+  @override
+  State<ChooseModeScreen> createState() => _ChooseModeScreenState();
+}
+
+class _ChooseModeScreenState extends State<ChooseModeScreen> {
+  bool isNfcAvailable = false;
+  @override
+  initState() {
+    super.initState();
+    checkNfcAvailability();
+  }
+
+  Future<void> checkNfcAvailability() async {
+    final checkNFC = await NfcManager.instance.isAvailable();
+    setState(() {
+      isNfcAvailable = checkNFC;
+    });
   }
 
   @override
@@ -26,30 +34,25 @@ class ChooseModeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FutureBuilder(
-              future: checkNfcAvailability(),
-              builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text('Checking NFC availability...');
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return Text('NFC is available and enabled.');
-                }
-              },
-            ),
+            isNfcAvailable
+                ? Text('Your device\'s NFC is available')
+                : Text('Your device\'s NFC isn\' available'),
             ElevatedButton(
               // onTap: () => Navigator.of(context).pushNamed('/type-info'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/type_info');
-              },
+              onPressed: !isNfcAvailable
+                  ? null
+                  : () {
+                      Navigator.of(context).pushNamed('/type_info');
+                    },
               child: const Text('Type Info'),
             ),
             ElevatedButton(
               // onTap: () => Navigator.of(context).pushNamed('/scan-mrz'),
-              onPressed: () {
-                Navigator.of(context).pushNamed('/scan_mrz');
-              },
+              onPressed: !isNfcAvailable
+                  ? null
+                  : () {
+                      Navigator.of(context).pushNamed('/scan_mrz');
+                    },
               child: const Text('Scan MRZ'),
             ),
           ],
