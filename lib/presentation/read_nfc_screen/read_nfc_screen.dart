@@ -12,18 +12,18 @@ import 'package:logging/logging.dart';
 import '../../src/utils/mrtd.dart';
 import '../type_info/formats/formats.dart';
 
-class NFCScreen extends StatefulWidget {
+class ReadNFCScreen extends StatefulWidget {
   final String id;
   final String dob;
   final String doe;
-  const NFCScreen(
+  const ReadNFCScreen(
       {super.key, required this.id, required this.dob, required this.doe});
 
   @override
-  State<NFCScreen> createState() => _NFCScreenState();
+  State<ReadNFCScreen> createState() => _ReadNFCScreenState();
 }
 
-class _NFCScreenState extends State<NFCScreen> {
+class _ReadNFCScreenState extends State<ReadNFCScreen> {
   var _alertMessage = "";
   final _log = Logger("mrtdeg.app");
   var _isNfcAvailable = false;
@@ -200,7 +200,6 @@ class _NFCScreenState extends State<NFCScreen> {
         leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-// back to ChooseModeScreen
               Navigator.popUntil(context, ModalRoute.withName('/'));
             }),
         title: const Text('NFC Reader Screen'),

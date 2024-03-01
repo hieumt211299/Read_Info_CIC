@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dmrtd/dmrtd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_server_driven_ui/presentation/nfc_screen/nfc_screen.dart';
+import 'package:flutter_server_driven_ui/presentation/read_nfc_screen/read_nfc_screen.dart';
 import 'package:flutter_server_driven_ui/src/utils/mrz_prase_id_card.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:intl/intl.dart';
@@ -126,7 +126,7 @@ class MRZScannerState extends State<MRZScanner> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NFCScreen(
+            builder: (context) => ReadNFCScreen(
               id: _mrzParseIdCard.id,
               dob: _parseDateTime(_mrzParseIdCard.dob),
               doe: _parseDateTime(_mrzParseIdCard.doe),

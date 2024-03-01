@@ -4,7 +4,7 @@ import 'package:dmrtd/dmrtd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_server_driven_ui/presentation/nfc_screen/nfc_screen.dart';
+import 'package:flutter_server_driven_ui/presentation/read_nfc_screen/read_nfc_screen.dart';
 import 'package:intl/intl.dart';
 
 class TypeInfoScreen extends StatefulWidget {
@@ -154,7 +154,7 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => NFCScreen(
+                                      builder: (context) => ReadNFCScreen(
                                         id: _docNumber.text,
                                         dob: _dob.text,
                                         doe: _doe.text,
@@ -211,9 +211,9 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
                     // _docNumber.text = '054199009176';
                     // _dob.text = '05/09/1999';
                     // _doe.text = '05/09/2024';
-                    _docNumber.text = '020099000036';
-                    _dob.text = '12/21/1999';
-                    _doe.text = '12/21/2024';
+                    // _docNumber.text = '020099000036';
+                    // _dob.text = '12/21/1999';
+                    // _doe.text = '12/21/2024';
                     return 'Số căn cước công dân không thể trống';
                   }
                   return null;
