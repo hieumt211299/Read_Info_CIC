@@ -67,57 +67,71 @@ class ResultScreen extends StatelessWidget {
                 );
               }),
           title: const Text('Result'),
-          //
-          actions: [],
-        ),
-        body: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Image.memory(getJpegIm(mrtdData!.dg2!.toBytes())!),
+          // /
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ChooseModeScreen()),
+                  (Route<dynamic> route) => false,
+                );
+              },
             ),
-            if (mrtdData!.dg1 != null)
-              // Text(formatMRZ(mrtdData!.dg1!.mrz)),
-              SizedBox(
-                width: 300,
-                child: Column(
-                  children: [
-                    InfoRow(
-                      label: 'firstName',
-                      value: mrtdData!.dg1!.mrz.firstName,
-                    ),
-                    InfoRow(
-                      label: 'lastName',
-                      value: mrtdData!.dg1!.mrz.lastName,
-                    ),
-                    InfoRow(
-                      label: 'Ngày sinh',
-                      value: DateFormat('dd/MM/yy')
-                          .format(mrtdData!.dg1!.mrz.dateOfBirth),
-                    ),
-                    InfoRow(
-                      label: 'Ngày hết hạn thẻ',
-                      value: DateFormat('dd/MM/yy')
-                          .format(mrtdData!.dg1!.mrz.dateOfExpiry),
-                    ),
-                    InfoRow(
-                      label: 'Giới tính',
-                      value: mrtdData!.dg1!.mrz.gender == 'M' ? 'Nam' : 'Nữ',
-                    ),
-                    InfoRow(
-                      label: 'Quốc tịch',
-                      value: mrtdData!.dg1!.mrz.nationality == 'VNM'
-                          ? 'Việt Nam'
-                          : 'Nước Ngoài',
-                    ),
-                    InfoRow(
-                      label: 'Số căn cước',
-                      value: id,
-                    ),
-                  ],
-                ),
-              ),
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Image.memory(getJpegIm(mrtdData!.dg2!.toBytes())!),
+              ),
+              if (mrtdData!.dg1 != null)
+                // Text(formatMRZ(mrtdData!.dg1!.mrz)),
+                SizedBox(
+                  width: 300,
+                  child: Column(
+                    children: [
+                      InfoRow(
+                        label: 'firstName',
+                        value: mrtdData!.dg1!.mrz.firstName,
+                      ),
+                      InfoRow(
+                        label: 'lastName',
+                        value: mrtdData!.dg1!.mrz.lastName,
+                      ),
+                      InfoRow(
+                        label: 'Ngày sinh',
+                        value: DateFormat('dd/MM/yy')
+                            .format(mrtdData!.dg1!.mrz.dateOfBirth),
+                      ),
+                      InfoRow(
+                        label: 'Ngày hết hạn thẻ',
+                        value: DateFormat('dd/MM/yy')
+                            .format(mrtdData!.dg1!.mrz.dateOfExpiry),
+                      ),
+                      InfoRow(
+                        label: 'Giới tính',
+                        value: mrtdData!.dg1!.mrz.gender == 'M' ? 'Nam' : 'Nữ',
+                      ),
+                      InfoRow(
+                        label: 'Quốc tịch',
+                        value: mrtdData!.dg1!.mrz.nationality == 'VNM'
+                            ? 'Việt Nam'
+                            : 'Nước Ngoài',
+                      ),
+                      InfoRow(
+                        label: 'Số căn cước',
+                        value: id,
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
         ),
       );
 }
