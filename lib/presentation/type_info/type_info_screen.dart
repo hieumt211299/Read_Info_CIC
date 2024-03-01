@@ -119,14 +119,14 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
         iosContentBottomPadding: false,
         body: Material(
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(8),
               child: SingleChildScrollView(
                 controller: _scrollController,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 20),
+                    // const SizedBox(height: 20),
                     // Row(
                     //   children: <Widget>[
                     //     const Text(
@@ -149,6 +149,8 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
                           _disabledInput() || !_mrzData.currentState!.validate()
                               ? null
                               : () {
+                                  Navigator.popUntil(
+                                      context, ModalRoute.withName('/'));
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -185,100 +187,104 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
       child: Form(
         key: _mrzData,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextFormField(
-              enabled: !_disabledInput(),
-              controller: _docNumber,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Căn cước công dân',
-                  fillColor: Colors.white),
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]+')),
-                LengthLimitingTextInputFormatter(14)
-              ],
-              textInputAction: TextInputAction.done,
-              textCapitalization: TextCapitalization.characters,
-              autofocus: true,
-              validator: (value) {
-                if (value?.isEmpty ?? false) {
-                  //  here`
-                  // _docNumber.text = '054199009176';
-                  // _dob.text = '05/09/1999';
-                  // _doe.text = '05/09/2024';
-                  _docNumber.text = '020099000036';
-                  _dob.text = '12/21/1999';
-                  _doe.text = '12/21/2024';
-                  return 'Số căn cước công dân không thể trống';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextFormField(
                 enabled: !_disabledInput(),
-                controller: _dob,
+                controller: _docNumber,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Ngày tháng năm sinh',
+                    labelText: 'Căn cước công dân',
+                    fillColor: Colors.white),
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]+')),
+                  LengthLimitingTextInputFormatter(14)
+                ],
+                textInputAction: TextInputAction.done,
+                textCapitalization: TextCapitalization.characters,
+                autofocus: true,
+                validator: (value) {
+                  if (value?.isEmpty ?? false) {
+                    //  here`
+                    // _docNumber.text = '054199009176';
+                    // _dob.text = '05/09/1999';
+                    // _doe.text = '05/09/2024';
+                    _docNumber.text = '020099000036';
+                    _dob.text = '12/21/1999';
+                    _doe.text = '12/21/2024';
+                    return 'Số căn cước công dân không thể trống';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                  enabled: !_disabledInput(),
+                  controller: _dob,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Ngày tháng năm sinh',
+                      fillColor: Colors.white),
+                  autofocus: false,
+                  validator: (value) {
+                    if (value?.isEmpty ?? false) {
+                      return 'Ngày tháng năm sinh không thể trống';
+                    }
+                    return null;
+                  },
+                  onTap: () async {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    // Can pick date which dates 15 years back or more
+                    final now = DateTime.now();
+                    final firstDate =
+                        DateTime(now.year - 90, now.month, now.day);
+                    final lastDate =
+                        DateTime(now.year - 15, now.month, now.day);
+                    final initDate = _getDOBDate();
+                    final date = await _pickDate(
+                        context, firstDate, initDate ?? lastDate, lastDate);
+
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    if (date != null) {
+                      _dob.text = date;
+                    }
+                  }),
+              const SizedBox(height: 12),
+              TextFormField(
+                enabled: !_disabledInput(),
+                controller: _doe,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Ngày hết hạn ',
                     fillColor: Colors.white),
                 autofocus: false,
                 validator: (value) {
                   if (value?.isEmpty ?? false) {
-                    return 'Ngày tháng năm sinh không thể trống';
+                    return 'Ngày hết hạn không thể trống';
                   }
                   return null;
                 },
                 onTap: () async {
                   FocusScope.of(context).requestFocus(FocusNode());
-                  // Can pick date which dates 15 years back or more
+                  // Can pick date from tomorrow and up to 10 years
                   final now = DateTime.now();
-                  final firstDate = DateTime(now.year - 90, now.month, now.day);
-                  final lastDate = DateTime(now.year - 15, now.month, now.day);
-                  final initDate = _getDOBDate();
+                  final firstDate = DateTime(now.year, now.month, now.day + 1);
+                  final lastDate =
+                      DateTime(now.year + 50, now.month + 6, now.day);
+                  final initDate = _getDOEDate();
                   final date = await _pickDate(
-                      context, firstDate, initDate ?? lastDate, lastDate);
+                      context, firstDate, initDate ?? firstDate, lastDate);
 
                   FocusScope.of(context).requestFocus(FocusNode());
                   if (date != null) {
-                    _dob.text = date;
+                    _doe.text = date;
                   }
-                }),
-            const SizedBox(height: 12),
-            TextFormField(
-              enabled: !_disabledInput(),
-              controller: _doe,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Ngày hết hạn ',
-                  fillColor: Colors.white),
-              autofocus: false,
-              validator: (value) {
-                if (value?.isEmpty ?? false) {
-                  return 'Ngày hết hạn không thể trống';
-                }
-                return null;
-              },
-              onTap: () async {
-                FocusScope.of(context).requestFocus(FocusNode());
-                // Can pick date from tomorrow and up to 10 years
-                final now = DateTime.now();
-                final firstDate = DateTime(now.year, now.month, now.day + 1);
-                final lastDate =
-                    DateTime(now.year + 50, now.month + 6, now.day);
-                final initDate = _getDOEDate();
-                final date = await _pickDate(
-                    context, firstDate, initDate ?? firstDate, lastDate);
-
-                FocusScope.of(context).requestFocus(FocusNode());
-                if (date != null) {
-                  _doe.text = date;
-                }
-              },
-            )
-          ],
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
