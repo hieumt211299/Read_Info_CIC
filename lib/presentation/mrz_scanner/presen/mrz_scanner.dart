@@ -70,6 +70,7 @@ class MRZScannerState extends State<MRZScanner> {
     if (_isBusy) return;
     _isBusy = true;
 
+    await Future.delayed(Duration(seconds: 2));
     final recognizedText = await _textRecognizer.processImage(inputImage);
     String fullText = recognizedText.text;
     String trimmedText = fullText.replaceAll(' ', '');
@@ -132,6 +133,8 @@ class MRZScannerState extends State<MRZScanner> {
             ),
           ),
         );
+        _canProcess = false;
+        _textRecognizer.close();
         return true;
         // ReadMRTD.readmrtd(
         //   context,
