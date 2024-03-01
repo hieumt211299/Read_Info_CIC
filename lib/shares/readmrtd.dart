@@ -148,6 +148,11 @@ class ReadMRTD {
               }
             }
 
+            try {
+              _readMRTD(); // Start listening for an NFC tag
+            } catch (e) {
+              _log.severe("Error while starting NFC session: $e");
+            }
             _readMRTD();
             return Center(
               child: AlertDialog(

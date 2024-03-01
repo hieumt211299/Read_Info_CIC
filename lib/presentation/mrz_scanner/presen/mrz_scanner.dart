@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:dmrtd/dmrtd.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_server_driven_ui/shares/readmrtd.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_server_driven_ui/presentation/nfc_screen/nfc_screen.dart';
 import 'package:flutter_server_driven_ui/src/utils/mrz_prase_id_card.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:intl/intl.dart';
@@ -22,12 +26,45 @@ class MRZScanner extends StatefulWidget {
 }
 
 class MRZScannerState extends State<MRZScanner> {
+  var _isNfcAvailable = false;
+  var _isReading = false;
+  // ignore: unused_field
+  late Timer _timerStateUpdater;
   final TextRecognizer _textRecognizer = TextRecognizer();
   bool _canProcess = true;
   bool _isBusy = false;
   List result = [];
 
   void resetScanning() => _isBusy = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initPlatformState();
+    _timerStateUpdater = Timer.periodic(const Duration(seconds: 3), (Timer t) {
+      _initPlatformState();
+    });
+  }
+
+  Future<void> _initPlatformState() async {
+    bool isNfcAvailable;
+    try {
+      NfcStatus status = await NfcProvider.nfcStatus;
+      isNfcAvailable = status == NfcStatus.enabled;
+    } on PlatformException {
+      isNfcAvailable = false;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _isNfcAvailable = isNfcAvailable;
+    });
+  }
 
   @override
   void dispose() async {
@@ -70,10 +107,11 @@ class MRZScannerState extends State<MRZScanner> {
     int startIndex = trimmedText.indexOf("IDVNM");
     int endIndex = trimmedText.indexOf("VNM<<<<");
     if (startIndex != -1 && endIndex != -1) {
-      String test = trimmedText.substring(startIndex, endIndex + 5).trim();
-      print('test $test ========');
-      _isBusy = await _verifyMRZ(test);
-      print(_isBusy);
+      String test;
+      try {
+        test = trimmedText.substring(startIndex, endIndex + 5).trim();
+        _isBusy = await _verifyMRZ(test);
+      } catch (e) {}
     } else {
       print("IDVNM not found in the text");
       _isBusy = false;
@@ -112,13 +150,26 @@ class MRZScannerState extends State<MRZScanner> {
       _mrzParseIdCard.country2 = getData('country');
       if (_mrzParseIdCard.country1 == _mrzParseIdCard.country2 &&
           _mrzParseIdCard.type == "ID") {
-        ReadMRTD.readmrtd(
+        Navigator.push(
           context,
-          _mrzParseIdCard.id,
-          _parseDateTime(_mrzParseIdCard.dob),
-          _parseDateTime(_mrzParseIdCard.doe),
+          MaterialPageRoute(
+            builder: (context) => NFCScreen(
+              id: _mrzParseIdCard.id,
+              dob: _parseDateTime(_mrzParseIdCard.dob),
+              doe: _parseDateTime(_mrzParseIdCard.doe),
+            ),
+          ),
         );
+
+        _canProcess = false;
+        _textRecognizer.close();
         return true;
+        // ReadMRTD.readmrtd(
+        //   context,
+        //   _mrzParseIdCard.id,
+        //   _parseDateTime(_mrzParseIdCard.dob),
+        //   _parseDateTime(_mrzParseIdCard.doe),
+        // );
       } else {
         await showDialog(
           context: context,

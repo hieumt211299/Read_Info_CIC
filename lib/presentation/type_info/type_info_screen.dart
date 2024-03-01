@@ -4,11 +4,8 @@ import 'package:dmrtd/dmrtd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_server_driven_ui/shares/readmrtdtest.dart';
-import 'package:flutter_server_driven_ui/shares/readmrtd.dart';
-import 'package:flutter_server_driven_ui/src/utils/mrtd.dart';
+import 'package:flutter_server_driven_ui/presentation/nfc_screen/nfc_screen.dart';
 import 'package:intl/intl.dart';
-import 'package:logging/logging.dart';
 
 class TypeInfoScreen extends StatefulWidget {
   const TypeInfoScreen({super.key});
@@ -152,12 +149,22 @@ class _TypeInfoScreenState extends State<TypeInfoScreen> {
                           _disabledInput() || !_mrzData.currentState!.validate()
                               ? null
                               : () {
-                                  ReadMRTD.readmrtd(
+                                  Navigator.push(
                                     context,
-                                    _docNumber.text,
-                                    _dob.text,
-                                    _doe.text,
+                                    MaterialPageRoute(
+                                      builder: (context) => NFCScreen(
+                                        id: _docNumber.text,
+                                        dob: _dob.text,
+                                        doe: _doe.text,
+                                      ),
+                                    ),
                                   );
+                                  // ReadMRTD.readmrtd(
+                                  //   context,
+                                  //   _docNumber.text,
+                                  //   _dob.text,
+                                  //   _doe.text,
+                                  // );
                                   return;
                                 },
                       child: PlatformText(
