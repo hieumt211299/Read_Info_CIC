@@ -197,6 +197,12 @@ class _NFCScreenState extends State<NFCScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+// back to ChooseModeScreen
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            }),
         title: const Text('NFC Reader Screen'),
       ),
       body: Center(

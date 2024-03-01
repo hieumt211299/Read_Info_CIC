@@ -160,9 +160,6 @@ class MRZScannerState extends State<MRZScanner> {
             ),
           ),
         );
-
-        _canProcess = false;
-        _textRecognizer.close();
         return true;
         // ReadMRTD.readmrtd(
         //   context,

@@ -59,28 +59,10 @@ class ResultScreen extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
 // back to ChooseModeScreen
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ChooseModeScreen()),
-                  (Route<dynamic> route) => false,
-                );
+                Navigator.popUntil(context, ModalRoute.withName('/'));
               }),
           title: const Text('Result'),
           // /
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.home),
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ChooseModeScreen()),
-                  (Route<dynamic> route) => false,
-                );
-              },
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Column(
