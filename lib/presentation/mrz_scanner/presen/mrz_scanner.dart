@@ -26,10 +26,6 @@ class MRZScanner extends StatefulWidget {
 }
 
 class MRZScannerState extends State<MRZScanner> {
-  var _isNfcAvailable = false;
-  var _isReading = false;
-  // ignore: unused_field
-  late Timer _timerStateUpdater;
   final TextRecognizer _textRecognizer = TextRecognizer();
   bool _canProcess = true;
   bool _isBusy = false;
@@ -39,31 +35,7 @@ class MRZScannerState extends State<MRZScanner> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _initPlatformState();
-    _timerStateUpdater = Timer.periodic(const Duration(seconds: 3), (Timer t) {
-      _initPlatformState();
-    });
-  }
-
-  Future<void> _initPlatformState() async {
-    bool isNfcAvailable;
-    try {
-      NfcStatus status = await NfcProvider.nfcStatus;
-      isNfcAvailable = status == NfcStatus.enabled;
-    } on PlatformException {
-      isNfcAvailable = false;
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _isNfcAvailable = isNfcAvailable;
-    });
   }
 
   @override

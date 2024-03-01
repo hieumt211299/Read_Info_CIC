@@ -158,19 +158,19 @@ class _NFCScreenState extends State<NFCScreen> {
       }
     } on Exception catch (e) {
       final se = e.toString().toLowerCase();
-      String alertMsg = "An error has occurred while reading Passport!";
+      String alertMsg = "An error has occurred while reading ID!";
       if (e is PassportError) {
         if (se.contains("security status not satisfied")) {
           alertMsg =
               "Failed to initiate session with passport.\nCheck input data!";
         }
-        _log.error("PassportError: ${e.message}");
+        _log.error("IDError: ${e.message}");
       } else {
         _log.error("An exception was encountered while trying to read ID: $e");
       }
 
       if (se.contains('timeout')) {
-        alertMsg = "Timeout while waiting for Passport tag";
+        alertMsg = "Timeout while waiting for ID tag";
       } else if (se.contains("tag was lost")) {
         alertMsg = "Tag was lost. Please try again!";
       } else if (se.contains("invalidated by user")) {
