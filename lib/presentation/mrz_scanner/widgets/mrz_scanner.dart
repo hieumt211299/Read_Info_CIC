@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:dmrtd/dmrtd.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_server_driven_ui/presentation/read_nfc_screen/read_nfc_screen.dart';
 import 'package:flutter_server_driven_ui/src/utils/mrz_prase_id_card.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';

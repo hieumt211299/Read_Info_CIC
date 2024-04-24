@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_commons/google_mlkit_commons.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'camera_overlay.dart';
 
 class MRZCameraView extends StatefulWidget {
@@ -149,26 +149,35 @@ class _MRZCameraViewState extends State<MRZCameraView> {
         InputImageFormatValue.fromRawValue(image.format.raw);
     if (inputImageFormat == null) return;
 
-    final planeData = image.planes.map(
-      (Plane plane) {
-        return InputImagePlaneMetadata(
-          bytesPerRow: plane.bytesPerRow,
-          height: plane.height,
-          width: plane.width,
-        );
-      },
-    ).toList();
+    // final planeData = image.planes.map(
+    //   (Plane plane) {
+    //     return InputImagePlaneMetadata(
+    //       bytesPerRow: plane.bytesPerRow,
+    //       height: plane.height,
+    //       width: plane.width,
+    //     );
+    //   },
+    // ).toList();
 
-    final inputImageData = InputImageData(
+    // final inputImageData = InputImageData(
+    //   size: imageSize,
+    //   imageRotation: imageRotation,
+    //   inputImageFormat: inputImageFormat,
+    //   planeData: planeData,
+    // );
+
+    // final inputImage =
+    //     InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+    final inputImageData = InputImageMetadata(
       size: imageSize,
-      imageRotation: imageRotation,
-      inputImageFormat: inputImageFormat,
-      planeData: planeData,
+      rotation: imageRotation,
+      format: inputImageFormat,
+      bytesPerRow: image.planes[0].bytesPerRow,
     );
-
-    final inputImage =
-        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
+    final inputImage = InputImage.fromBytes(
+      bytes: bytes,
+      metadata: inputImageData,
+    );
     widget.onImage(inputImage);
   }
 }
